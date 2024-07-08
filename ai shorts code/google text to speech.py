@@ -25,7 +25,7 @@ def create_text_to_speech():
             quote = str(cell_obj.value)
             number_string1 = str(i - 1)
             number_string2 = str(j-1)
-            tts = gTTS(quote, tld="com.au", slow = TRUE)
+            tts = gTTS(quote,lang="en", tld="us", slow = False)
             output_path = os.path.join("C:\\Users\\sudha\\Documents\\GitHub\\ai-shorts-code\\text to speech output", f"{number_string1}pt{number_string2}.mp3")
             tts.save(output_path)
 
@@ -38,7 +38,7 @@ def trim_tts_audio():
             audio = AudioSegment.from_mp3("C:\\Users\\sudha\\Documents\\GitHub\\ai-shorts-code\\text to speech output\\"+I+"pt"+J+".mp3")
 
             # Trim silence from the end (adjust silence_thresh and duration parameters as needed)
-            trimmed_audio = audio.strip_silence(silence_thresh=-50)
+            trimmed_audio = audio.strip_silence(silence_thresh=-60)
             trimmed_audio.export("C:\\Users\\sudha\\Documents\\GitHub\\ai-shorts-code\\trimmed audio\\"+I+"pt"+J+".mp3", format='mp3')
 
 def change_audio_speed():
@@ -113,7 +113,7 @@ def overlay_audio():
         # Run the ffmpeg command
         subprocess.run(cmd, check=True)
 
-
+print("Please Wait. Processing...")
 create_text_to_speech()
 trim_tts_audio()
 change_audio_speed()
